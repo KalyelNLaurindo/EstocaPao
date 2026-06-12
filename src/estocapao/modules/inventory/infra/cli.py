@@ -11,9 +11,9 @@ from estocapao.modules.inventory.infra.repo import LocalJsonRepositoryAdapter
 from estocapao.modules.inventory.app.usecase import UpdateStockUseCase, GetInventoryStatusUseCase
 from estocapao.modules.inventory.app.quarantine import QuarantineManager
 from estocapao.modules.inventory.domain.entity import IngredientEntity, InsufficientStockError
-from estocapao.modules.inventory.domain.value import DomainValidationError, InvalidQuantityError, InvalidDateError
+from estocapao.modules.inventory.domain.value import DomainValidationError
 from estocapao.shared.logger import log_action
-from estocapao.shared.ansi import TerminalAnsiFormatter, CRITICAL_ALERT, SUCCESS, WARNING, INFO
+from estocapao.shared.ansi import TerminalAnsiFormatter, CRITICAL_ALERT, SUCCESS, WARNING
 
 
 class CommandLineInterfaceParser:
