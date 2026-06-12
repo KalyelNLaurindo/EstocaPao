@@ -80,7 +80,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * **[TSK-09](TSK-09.md): Build CommandLineInterfaceParser and Command Arguments Router**  
   * Epic Link: FT-05 (CLI & Alerts Router)  
   * RICE Score: 100.0 (High Priority / Must Have) | Value: 5 / Effort: 3 / Reach: 100 / Impact: 3 / Confidence: 1.0  
-  * Status: To Do  
+  * Status: Done  
 * **[TSK-10](TSK-10.md): Build Logging Engine & Colored CLI Warn/Info Outputs**  
   * Epic Link: FT-05 (CLI & Alerts Router)  
   * RICE Score: 64.0 (Medium Priority / Should Have) | Value: 3 / Effort: 1 / Reach: 80 / Impact: 1 / Confidence: 0.8  
@@ -97,7 +97,6 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🔴 To Do (Ready for Development)**
 
-* [ ] **[TSK-09](TSK-09.md):** Build CommandLineInterfaceParser and Command Arguments Router  
 * [ ] **[TSK-10](TSK-10.md):** Build Logging Engine & Colored CLI Warn/Info Outputs  
 * [ ] **[TSK-11](TSK-11.md):** Establish Package Setup (pyproject.toml) and Entry Point Execution Engine
 
@@ -111,6 +110,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🟢 Done (Merged & Verified in Main Trunk)**
 
+* [x] **[TSK-09](TSK-09.md):** Build CommandLineInterfaceParser and Command Arguments Router  
 * [x] **[TSK-08](TSK-08.md):** Create Self-Healing Schema Recovery and Disaster Recovery DRP Suite  
 * [x] **[TSK-07](TSK-07.md):** Develop LocalJsonRepositoryAdapter & Atomic Write Protocol  
 * [x] **[TSK-06](TSK-06.md):** Secure File Permission Locks & Structural Scheme Validator  
