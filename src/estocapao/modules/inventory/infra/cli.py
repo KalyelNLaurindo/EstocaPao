@@ -194,7 +194,7 @@ class CommandLineInterfaceParser:
                     print("Nenhum ingrediente cadastrado no estoque.")
                     return
 
-                print(f"{'ID':<10} | {'Nome':<25} | {'Quantidade':<12} | {'Limite Mín':<10} | {'Status':<10}")
+                print(f"{'ID':<10} | {'Nome':<25} | {'Quantidade':<12} | {'Limite Min':<10} | {'Status':<10}")
                 print("-" * 72)
                 for details in report.values():
                     status_str = details['status']
