@@ -21,3 +21,5 @@ CLAUDE.md
 
 # Packaging and build directories
 *.egg-info/
+build/
+dist/
