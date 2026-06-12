@@ -94,12 +94,12 @@ This codebase represents a highly documented software engineering project. Navig
 Progress of the EstocaPão system foundation is tracked directly through the development roadmap:
 
 - [x] **Phase 0: Project Setup** — Workspace directories established, PEP 8 linter set, and CLAUDE.md developer guide generated.
-- [ ] **Phase 1: Pure Domain Layer** — Building `BatchValueObject` and `IngredientEntity` with strict stock invariants (TDD core).
-- [ ] **Phase 2: Use Case Interactors** — Orchestration for `UpdateStock`, `GetInventoryStatus`, and logical quarantine routing.
-- [ ] **Phase 3: Configurations & Permissions** — Custom configuration parsers, database scheme validations, and OS-level file locking.
-- [ ] **Phase 4: Persistence Layer** — Json persistence adapters implementing atomic swap writes (`db_backup.tmp` ➔ `os.replace`).
-- [ ] **Phase 5: CLI Routing & Logs** — Standard `argparse` controllers, high-contrast ANSI logs, and system logging to `estocapao.log`.
-- [ ] **Phase 6: Distribution Packaging** — Executable command packaging via `pyproject.toml` enabling global `estocapao` command.
+- [x] **Phase 1: Pure Domain Layer** — Building `BatchValueObject` and `IngredientEntity` with strict stock invariants (TDD core).
+- [x] **Phase 2: Use Case Interactors** — Orchestration for `UpdateStock`, `GetInventoryStatus`, and logical quarantine routing.
+- [x] **Phase 3: Configurations & Permissions** — Custom configuration parsers, database scheme validations, and OS-level file locking.
+- [x] **Phase 4: Persistence Layer** — Json persistence adapters implementing atomic swap writes (`db_backup.tmp` ➔ `os.replace`).
+- [x] **Phase 5: CLI Routing & Logs** — Standard `argparse` controllers, high-contrast ANSI logs, and system logging to `estocapao.log`.
+- [x] **Phase 6: Distribution Packaging** — Executable command packaging via `pyproject.toml` enabling global `estocapao` command.
 
 ---
 
