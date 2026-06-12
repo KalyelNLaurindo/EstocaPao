@@ -1,0 +1,27 @@
+name: Python Integration CI
+
+on:
+  push:
+    branches: [ main, develop, feature ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Run Test Suite
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Run Unit Tests
+      env:
+        PYTHONPATH: src
+      run: |
+        python -m unittest discover -s tests/unit
