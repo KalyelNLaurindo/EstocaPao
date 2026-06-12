@@ -13,6 +13,7 @@ from estocapao.modules.inventory.app.quarantine import QuarantineManager
 from estocapao.modules.inventory.domain.entity import IngredientEntity, InsufficientStockError
 from estocapao.modules.inventory.domain.value import DomainValidationError, InvalidQuantityError, InvalidDateError
 from estocapao.shared.logger import log_action
+from estocapao.shared.ansi import TerminalAnsiFormatter, CRITICAL_ALERT, SUCCESS, WARNING, INFO
 
 
 class CommandLineInterfaceParser:
@@ -80,10 +81,12 @@ class CommandLineInterfaceParser:
 
         # For other commands, we must ensure dependencies are initialised
         try:
-            _ = initialize_dependencies()
+            config = initialize_dependencies()
         except Exception as e:
             print(f"Erro ao inicializar dependências: {e}", file=sys.stderr)
             sys.exit(1)
+
+        color_formatter = TerminalAnsiFormatter(config.alert_color_enabled)
 
         # Create repo and use cases
         repo = LocalJsonRepositoryAdapter("db_backup.json")
@@ -194,7 +197,24 @@ class CommandLineInterfaceParser:
                 print(f"{'ID':<10} | {'Nome':<25} | {'Quantidade':<12} | {'Limite Mín':<10} | {'Status':<10}")
                 print("-" * 72)
                 for details in report.values():
-                    print(f"{details['id']:<10} | {details['name']:<25} | {details['total_quantity']:<12.1f} | {details['safety_threshold']:<10.1f} | {details['status']:<10}")
+                    status_str = details['status']
+                    if status_str == "LOW_STOCK":
+                        status_display = color_formatter.format(status_str, WARNING)
+                    else:
+                        status_display = color_formatter.format(status_str, SUCCESS)
+                    print(f"{details['id']:<10} | {details['name']:<25} | {details['total_quantity']:<12.1f} | {details['safety_threshold']:<10.1f} | {status_display}")
+
+                # Print quarantined/expired batches summary
+                ingredients = repo.get_all()
+                quarantined_items = []
+                for ing in ingredients.values():
+                    for q_batch in ing.quarantine_batches:
+                        quarantined_items.append((ing.name, q_batch))
+
+                if quarantined_items:
+                    print("\n" + color_formatter.format("⚠️ LOTES EM QUARENTENA (VENCIDOS):", CRITICAL_ALERT))
+                    for ing_name, batch in quarantined_items:
+                        print(f"- Lote {batch.batch_id} ({ing_name}): {batch.quantity:.1f} unidades (Expirado em {batch.expiration_date.isoformat()})")
 
             elif parsed_args.subcommand == "discard":
                 batch_id = parsed_args.batch_id.strip()
@@ -203,13 +223,16 @@ class CommandLineInterfaceParser:
                 log_action("INFO", f"Lote {batch_id} descartado da quarentena com sucesso.")
 
         except InsufficientStockError:
-            print("Erro: Estoque insuficiente.", file=sys.stderr)
+            err_msg = color_formatter.format("Erro: Estoque insuficiente.", CRITICAL_ALERT)
+            print(err_msg, file=sys.stderr)
             sys.exit(1)
         except DomainValidationError as e:
-            print(f"Erro de validação: {e}", file=sys.stderr)
+            err_msg = color_formatter.format(f"Erro de validação: {e}", CRITICAL_ALERT)
+            print(err_msg, file=sys.stderr)
             sys.exit(1)
         except Exception as e:
-            print(f"Erro: {e}", file=sys.stderr)
+            err_msg = color_formatter.format(f"Erro: {e}", CRITICAL_ALERT)
+            print(err_msg, file=sys.stderr)
             sys.exit(1)
 
 

@@ -156,5 +156,69 @@ class TestInventoryUseCases(unittest.TestCase):
         self.assertEqual(report["SG-002"]["safety_threshold"], 10.0)
         self.assertEqual(report["SG-002"]["status"], "OK")
 
+class TestAnsiAndLogger(unittest.TestCase):
+    """Unit tests for the ANSI color formatter and logging engine."""
+
+    def test_ansi_formatter_colors_enabled(self):
+        """Should apply bold and ANSI escape codes if color is enabled and sys.stdout is a TTY."""
+        from estocapao.shared.ansi import TerminalAnsiFormatter, CRITICAL_ALERT
+        from unittest.mock import patch
+
+        # Mock sys.stdout.isatty to return True
+        with patch("sys.stdout.isatty", return_value=True):
+            formatter = TerminalAnsiFormatter(color_enabled=True)
+            formatted = formatter.format("alerta", CRITICAL_ALERT)
+            
+            self.assertIn("\033[1m", formatted)
+            self.assertIn(CRITICAL_ALERT, formatted)
+            self.assertIn("alerta", formatted)
+            self.assertIn("\033[0m", formatted)
+
+    def test_ansi_formatter_colors_disabled(self):
+        """Should return plain text if color is disabled or sys.stdout is not a TTY."""
+        from estocapao.shared.ansi import TerminalAnsiFormatter, CRITICAL_ALERT
+        from unittest.mock import patch
+
+        # Case 1: color_enabled=False, TTY=True
+        with patch("sys.stdout.isatty", return_value=True):
+            formatter = TerminalAnsiFormatter(color_enabled=False)
+            formatted = formatter.format("alerta", CRITICAL_ALERT)
+            self.assertEqual(formatted, "alerta")
+
+        # Case 2: color_enabled=True, TTY=False
+        with patch("sys.stdout.isatty", return_value=False):
+            formatter = TerminalAnsiFormatter(color_enabled=True)
+            formatted = formatter.format("alerta", CRITICAL_ALERT)
+            self.assertEqual(formatted, "alerta")
+
+    def test_log_action_timestamp_format(self):
+        """Should write log timestamps in the YYYY-MM-DD HH:MM:SS format."""
+        import os
+        import re
+        from estocapao.shared.logger import log_action
+
+        log_file = "estocapao.log"
+        initial_size = 0
+        if os.path.exists(log_file):
+            initial_size = os.path.getsize(log_file)
+
+        log_action("TEST_ANSI_LOG", "This is an ANSI log message test.")
+
+        self.assertTrue(os.path.exists(log_file))
+        with open(log_file, "r", encoding="utf-8") as f:
+            f.seek(initial_size)
+            new_lines = f.readlines()
+
+        self.assertEqual(len(new_lines), 1)
+        log_line = new_lines[0]
+        
+        # Verify category and message
+        self.assertIn("[TEST_ANSI_LOG]", log_line)
+        self.assertIn("This is an ANSI log message test.", log_line)
+
+        # Regex for YYYY-MM-DD HH:MM:SS format: ^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]
+        match = re.match(r"^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]", log_line)
+        self.assertIsNotNone(match, f"Log line timestamp format is invalid: {log_line}")
+
 if __name__ == "__main__":
     unittest.main()

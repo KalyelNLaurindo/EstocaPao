@@ -3,7 +3,7 @@ import datetime
 
 def log_action(category: str, message: str) -> None:
     """Appends a time-stamped log message to our history file (estocapao.log) so we have a record of what happened."""
-    timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_line = f"[{timestamp}] [{category}] {message}\n"
     try:
         with open("estocapao.log", "a", encoding="utf-8") as f:
