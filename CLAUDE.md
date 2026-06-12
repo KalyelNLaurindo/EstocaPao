@@ -108,7 +108,7 @@ estocapao-root/
 
 Maintain strict compliance with PEP 8 and the following conventions:
 
-*   **Language & Style:** All inline comments, docstrings, and documentation must be written in English. Use clear, simple, and layperson-accessible wording so that non-technical users or developers can easily understand the purpose of the code.
+*   **Language & Style:** All inline code comments and code docstrings must be written in English. However, **all implementation plans (`implementation_plan.md`), walkthroughs (`walkthrough.md`), and user-facing design explanations must be written in Portuguese (PT-BR)**, using clear, simple, and highly explanatory language so that any developer or stakeholder can easily understand the proposed changes.
 *   **Suffixes & Prefixes:**
 
 | Role / Pattern | Suffix / Prefix | Example Name |
