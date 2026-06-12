@@ -20,3 +20,9 @@ estocapao = "estocapao.modules.inventory.infra.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pyrefly]
+# Tell Pyrefly where source files live (src/ layout)
+search_path = ["src"]
+# Point to the Python interpreter that has 'estocapao' on sys.path
+python_interpreter = "C:/Program Files/Python310/python.exe"
