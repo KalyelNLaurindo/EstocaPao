@@ -10,12 +10,12 @@ Implement the initial system setup routine within `src/estocapao/bootstrap/initi
 
 ## ✅ Definition of Ready (DoR)
 
-* [ ] Project directory structure structured according to PEP8 clean architectures.  
-* [ ] Parameter constraints (expiration days = 3, threshold defaults = 5.0kg) defined by product specifications.
+* [x] Project directory structure structured according to PEP8 clean architectures.  
+* [x] Parameter constraints (expiration days = 3, threshold defaults = 5.0kg) defined by product specifications.
 
 ## 🏁 Definition of Done (DoD) & Acceptance Criteria
 
-* [ ] **Criterion 1 (Functional):** The service parses config.ini cleanly. If the configuration file is missing, the initializer auto-heals by establishing a fresh, default config.ini (`alert_color_enabled = true`, `expiration_alert_days_window = 3`).  
-* [ ] **Criterion 2 (Robustness):** Ensure empty or malformed files default back to safe constants in-memory instead of crashing with file-access errors.  
-* [ ] **Criterion 3 (Quality/Test):** Validate initialization operations using temporary system directories within `tests/integration/test_initializer.py`.  
-* [ ] **Criterion 4 (Review):** Verify no domain modules, use-case files, or UI adapters are imported inside the bootstrap path.
+* [x] **Criterion 1 (Functional):** The service parses config.ini cleanly. If the configuration file is missing, the initializer auto-heals by establishing a fresh, default config.ini (`alert_color_enabled = true`, `expiration_alert_days_window = 3`).  
+* [x] **Criterion 2 (Robustena):** Ensure empty or malformed files default back to safe constants in-memory instead of crashing with file-access errors.  
+* [x] **Criterion 3 (Quality/Test):** Validate initialization operations using temporary system directories within `tests/integration/test_initializer.py`.  
+* [x] **Criterion 4 (Review):** Verify no domain modules, use-case files, or UI adapters are imported inside the bootstrap path.
