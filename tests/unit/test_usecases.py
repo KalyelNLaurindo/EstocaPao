@@ -192,33 +192,44 @@ class TestAnsiAndLogger(unittest.TestCase):
             self.assertEqual(formatted, "alerta")
 
     def test_log_action_timestamp_format(self):
-        """Should write log timestamps in the YYYY-MM-DD HH:MM:SS format."""
-        import os
+        """Should write log entries with a YYYY-MM-DD HH:MM:SS timestamp format.
+
+        Uses a temporary isolated log file via patch so this test never writes
+        to the production estocapao.log, preventing TEST_ANSI_LOG entries from
+        appearing in real production log output during CI or local test runs.
+        """
         import re
+        import tempfile
+        from unittest.mock import patch
         from estocapao.shared.logger import log_action
 
-        log_file = "estocapao.log"
-        initial_size = 0
-        if os.path.exists(log_file):
-            initial_size = os.path.getsize(log_file)
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".log", delete=False, encoding="utf-8"
+        ) as tmp:
+            tmp_path = tmp.name
 
-        log_action("TEST_ANSI_LOG", "This is an ANSI log message test.")
+        try:
+            # Redirect all log_action writes to the isolated temp file
+            with patch("estocapao.shared.logger.LOG_FILE_PATH", tmp_path):
+                log_action("TEST_LOG", "This is a logger timestamp test.")
 
-        self.assertTrue(os.path.exists(log_file))
-        with open(log_file, "r", encoding="utf-8") as f:
-            f.seek(initial_size)
-            new_lines = f.readlines()
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                lines = f.readlines()
 
-        self.assertEqual(len(new_lines), 1)
-        log_line = new_lines[0]
-        
-        # Verify category and message
-        self.assertIn("[TEST_ANSI_LOG]", log_line)
-        self.assertIn("This is an ANSI log message test.", log_line)
+            self.assertEqual(len(lines), 1, "Expected exactly one log line.")
+            log_line = lines[0]
 
-        # Regex for YYYY-MM-DD HH:MM:SS format: ^\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]
-        match = re.match(r"^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]", log_line)
-        self.assertIsNotNone(match, f"Log line timestamp format is invalid: {log_line}")
+            # Verify category and message are present
+            self.assertIn("[TEST_LOG]", log_line)
+            self.assertIn("This is a logger timestamp test.", log_line)
+
+            # Assert YYYY-MM-DD HH:MM:SS timestamp format
+            match = re.match(r"^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]", log_line)
+            self.assertIsNotNone(match, f"Log timestamp format is invalid: {log_line!r}")
+        finally:
+            import os
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
 
 if __name__ == "__main__":
     unittest.main()

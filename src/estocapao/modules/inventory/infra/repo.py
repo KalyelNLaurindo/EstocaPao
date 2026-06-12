@@ -81,8 +81,8 @@ class LocalJsonRepositoryAdapter(IInventoryRepository):
                         ))
                 
                 self._memory_cache[ing_id] = entity
-        except Exception:
-            pass
+        except Exception as e:
+            log_action("ERROR", f"Falha ao desserializar dados do banco de dados: {e}")
 
     def save(self, ingredient: IngredientEntity) -> None:
         """Saves the ingredient details to the JSON file safely, avoiding data loss if the computer crashes."""

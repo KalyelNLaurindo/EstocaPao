@@ -186,36 +186,23 @@ def initialize_dependencies(config_path: str = "config.ini", db_path: str = "db_
     config = load_config(config_path)
     secure_file_permissions(config_path)
 
-    if db_path:
+    # Guarantee the database file exists with a minimal valid structure.
+    # NOTE: Schema validation and self-healing recovery are the sole responsibility
+    # of LocalJsonRepositoryAdapter._load_from_disk(). Performing it here as well
+    # causes the .bak file to be consumed before the repo adapter can use it,
+    # triggering a spurious double-recovery cycle logged on every invocation.
+    if db_path and not os.path.exists(db_path):
         try:
-            validate_database_schema(db_path)
-        except InvalidSchemaError:
-            log_action("WARNING", "Banco de dados principal corrompido. Tentando restaurar a partir do backup.")
-            bak_path = db_path + ".bak"
-            bak_valid = False
-            if os.path.exists(bak_path):
-                try:
-                    validate_database_schema(bak_path)
-                    bak_valid = True
-                except InvalidSchemaError:
-                    pass
-            
-            if bak_valid:
-                try:
-                    os.replace(bak_path, db_path)
-                    log_action("INFO", "Banco de dados restaurado com sucesso a partir do backup.")
-                except Exception:
-                    bak_valid = False
-            
-            if not bak_valid:
-                try:
-                    with open(db_path, "w", encoding="utf-8") as f:
-                        f.write("{}")
-                    log_action("ERROR", "Banco de dados e backup corrompidos/ausentes. Inicializando banco de dados limpo.")
-                except Exception:
-                    pass
+            dir_name = os.path.dirname(db_path)
+            if dir_name:
+                os.makedirs(dir_name, exist_ok=True)
+            with open(db_path, "w", encoding="utf-8") as f:
+                f.write("{}")
+            log_action("INFO", f"Arquivo de banco de dados criado em: {db_path}")
+        except Exception as e:
+            log_action("CRITICAL", f"Falha ao criar arquivo de banco de dados inicial: {e}")
 
-        if os.path.exists(db_path):
-            secure_file_permissions(db_path)
+    if db_path and os.path.exists(db_path):
+        secure_file_permissions(db_path)
 
     return config

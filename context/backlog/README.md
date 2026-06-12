@@ -12,7 +12,7 @@
 * **Lead Tech Lead:** Kalyel Nunes Laurindo / Tech Lead  
 * **Current Sprint / Iteration:** Sprint 1 (Infrastructure & Domain Foundations)  
 * **Target Delivery Date:** July 15, 2026  
-* **Document Version:** v1.1
+* **Document Version:** v1.3
 
 ## **1\. 📊 Prioritization & Task Sizing Framework**
 
@@ -116,15 +116,51 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
   * RICE Score: 36.0 (Low Priority / Could Have) | Value: 3 / Effort: 3 / Reach: 60 / Impact: 2 / Confidence: 0.9  
   * Status: To Do  
 
+### **✨ Phase 8: Sprint 2 - UX Terminal & Hardening de Segurança (Backlog Futuro)**
+
+* **[TSK-17](TSK-17.md): Welcome Screen & Interactive Command Prompt (Tela de Apresentação e Prompt Interativo)**  
+  * Epic Link: FT-11 (UX Terminal & Onboarding)  
+  * RICE Score: 150.0 (High Priority / Must Have) | Value: 5 / Effort: 2 / Reach: 100 / Impact: 3 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-18](TSK-18.md): Semi-Visual Terminal Table Renderer (Renderizador de Tabelas Semi-Visuais)**  
+  * Epic Link: FT-11 (UX Terminal & Onboarding)  
+  * RICE Score: 150.0 (High Priority / Must Have) | Value: 5 / Effort: 2 / Reach: 100 / Impact: 3 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-19](TSK-19.md): Built-in Help System (Sistema de Ajuda Embutido)**  
+  * Epic Link: FT-11 (UX Terminal & Onboarding)  
+  * RICE Score: 100.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 100 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-20](TSK-20.md): Malicious Input & Edge Case Hardening (Proteção contra Entradas Maliciosas)**  
+  * Epic Link: FT-12 (Security & Input Hardening)  
+  * RICE Score: 90.0 (High Priority / Must Have) | Value: 5 / Effort: 2 / Reach: 90 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-21](TSK-21.md): Elegant Field Control & Auto-formatting (Controle de Campos Elegante e Auto-formatação)**  
+  * Epic Link: FT-12 (Security & Input Hardening)  
+  * RICE Score: 100.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 100 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-22](TSK-22.md): Structured Audit Logging Coverage (Cobertura Completa de Logs de Auditoria)**  
+  * Epic Link: FT-13 (Audit Trail)  
+  * RICE Score: 90.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 90 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+
 ## **3\. 📋 Basic Markdown Kanban Board**
 
 ### **🔴 To Do (Ready for Development)**
 
+**Phase 7 — Sprint 2: Recursos Avançados & Internacionalização**
 * [ ] **[TSK-12](TSK-12.md):** Basic Language Menu Support (Menu de Idiomas Básico)  
 * [ ] **[TSK-13](TSK-13.md):** Baking Recipes Engine (Dedução Automática por Receita)  
 * [ ] **[TSK-14](TSK-14.md):** Batch Financial Controls (Custo de Aquisição e Perdas de Inventário)  
 * [ ] **[TSK-15](TSK-15.md):** Report Exporting Engine (Exportação PDF/CSV)  
 * [ ] **[TSK-16](TSK-16.md):** Cloud Syncing Adapter (Sincronização Remota Backup Offline-First)  
+
+**Phase 8 — Sprint 2: UX Terminal & Hardening de Segurança**
+* [ ] **[TSK-17](TSK-17.md):** Welcome Screen & Interactive Command Prompt (Tela de Apresentação e Prompt Interativo)  
+* [ ] **[TSK-18](TSK-18.md):** Semi-Visual Terminal Table Renderer (Renderizador de Tabelas Semi-Visuais)  
+* [ ] **[TSK-19](TSK-19.md):** Built-in Help System (Sistema de Ajuda Embutido)  
+* [ ] **[TSK-20](TSK-20.md):** Malicious Input & Edge Case Hardening (Proteção contra Entradas Maliciosas)  
+* [ ] **[TSK-21](TSK-21.md):** Elegant Field Control & Auto-formatting (Controle de Campos Elegante e Auto-formatação)  
+* [ ] **[TSK-22](TSK-22.md):** Structured Audit Logging Coverage (Cobertura Completa de Logs de Auditoria)  
 
 ### **🟡 In Progress (Actively Being Built)**
 
