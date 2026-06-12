@@ -11,7 +11,6 @@
 [![CI](https://github.com/KalyelNLaurindo/estocapao/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/KalyelNLaurindo/estocapao/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-
 ---
 
 ## **🏛️ Repository Metadata & Context**
@@ -188,11 +187,11 @@ estocapao-root/
 
 ### **8.1. Prerequisites**
 
-| Requirement | Minimum Version | Check Command |
-| :--- | :--- | :--- |
-| Python | 3.10+ | `python --version` |
-| pip | bundled with Python | `pip --version` |
-| OS terminal | Windows PowerShell, macOS Terminal, or Linux Bash | — |
+| Requirement | Minimum Version                                   | Check Command      |
+| :---------- | :------------------------------------------------ | :----------------- |
+| Python      | 3.10+                                             | `python --version` |
+| pip         | bundled with Python                               | `pip --version`    |
+| OS terminal | Windows PowerShell, macOS Terminal, or Linux Bash | —                  |
 
 No third-party libraries are required. EstocaPão runs entirely on the Python Standard Library.
 
@@ -243,11 +242,10 @@ pip install -e .
 python -m unittest discover -s tests -v
 ```
 
-
 ---
 
 🏁 **End of Document:** This repository README serves as the definitive engineering portal for the EstocaPão ecosystem. Changes to core validation patterns, database fallback structures, or execution interfaces must comply with official pull-request governance.
 
 ---
 
-Feito com ❤️ por **Kalyel N. | Software Developer**
+Made with ❤️ by **Kalyel N. | Software Developer**
