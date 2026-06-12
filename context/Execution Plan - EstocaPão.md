@@ -115,35 +115,35 @@ This execution control checklist maps the technical implementation steps to thei
 * **Target Boundary:** [estocapao/bootstrap/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/bootstrap/) and [config.ini](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/config.ini)  
 * **Pre-Condition Test File:** [tests/integration/test_initializer.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/integration/test_initializer.py)  
 * **Associated Prompt Spec File:** [docs/prompts/ft01_config_bootstrap.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft01_config_bootstrap.md)  
-* **Status:** Pending
+* **Status:** Completed
 
 ### **FT-02: Bounded Domain Objects (Ingredients & Batches)**
 
 * **Target Boundary:** [estocapao/modules/inventory/domain/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/domain/) (Entities, VOs)  
 * **Pre-Condition Test File:** [tests/unit/test_domain_entity.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/unit/test_domain_entity.py)  
 * **Associated Prompt Spec File:** [docs/prompts/ft02_domain_logic.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft02_domain_logic.md)  
-* **Status:** Pending
+* **Status:** Completed
 
 ### **FT-03: Use Case Interactors & Quarantine Gatekeeper**
 
 * **Target Boundary:** [estocapao/modules/inventory/app/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/app/) (Use Cases)  
 * **Pre-Condition Test File:** [tests/unit/test_usecases.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/unit/test_usecases.py)  
 * **Associated Prompt Spec File:** [docs/prompts/ft03_usecases_quarantine.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft03_usecases_quarantine.md)  
-* **Status:** Pending
+* **Status:** Completed
 
 ### **FT-04: Repository Ports & Safe Atomic Replacement Adapter**
 
 * **Target Boundary:** [estocapao/modules/inventory/infra/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/infra/) (JSON Persistence)  
 * **Pre-Condition Test File:** [tests/integration/test_repo_adapter.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/integration/test_repo_adapter.py)  
 * **Associated Prompt Spec File:** [docs/prompts/ft04_atomic_persistence.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft04_atomic_persistence.md)  
-* **Status:** Pending
+* **Status:** Completed
 
 ### **FT-05: Argparse Router & Color Alert CLI UI**
 
 * **Target Boundary:** [estocapao/modules/inventory/infra/cli.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/infra/cli.py)  
 * **Pre-Condition Test File:** [tests/e2e/test_cli_commands.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/e2e/test_cli_commands.py)  
 * **Associated Prompt Spec File:** [docs/prompts/ft05_cli_router.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft05_cli_router.md)  
-* **Status:** Pending
+* **Status:** Completed
 
 ## **🛡️ 5. Definition of Done (DoD) for AI Iterations**
 
