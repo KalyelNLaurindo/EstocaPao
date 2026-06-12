@@ -145,6 +145,36 @@ This execution control checklist maps the technical implementation steps to thei
 * **Associated Prompt Spec File:** [docs/prompts/ft05_cli_router.md](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/docs/prompts/ft05_cli_router.md)  
 * **Status:** Completed
 
+### **FT-06: Internationalization & Language Selection Support**
+
+* **Target Boundary:** [estocapao/shared/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/shared/) (Translation catalogs) and CLI subcommands  
+* **Pre-Condition Test File:** [tests/unit/test_usecases.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/unit/test_usecases.py)  
+* **Status:** Pending
+
+### **FT-07: Recipes Formulation and FEFO Deductions (Bake)**
+
+* **Target Boundary:** [estocapao/modules/inventory/domain/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/domain/) (RecipeEntity)  
+* **Pre-Condition Test File:** [tests/unit/test_domain_entity.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/unit/test_domain_entity.py)  
+* **Status:** Pending
+
+### **FT-08: Financial Cost Tracking and Losses Dashboard**
+
+* **Target Boundary:** [estocapao/modules/inventory/domain/value.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/domain/value.py) and CLI reporting  
+* **Pre-Condition Test File:** [tests/unit/test_domain_value.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/unit/test_domain_value.py)  
+* **Status:** Pending
+
+### **FT-09: Premium PDF and CSV Reporting Exports**
+
+* **Target Boundary:** [estocapao/modules/inventory/infra/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/infra/) (Export adapters)  
+* **Pre-Condition Test File:** [tests/integration/test_repo_adapter.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/integration/test_repo_adapter.py)  
+* **Status:** Pending
+
+### **FT-10: Cloud Syncing Backup Adapter**
+
+* **Target Boundary:** [estocapao/modules/inventory/infra/](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/estocapao/modules/inventory/infra/) (Cloud backup adapter)  
+* **Pre-Condition Test File:** [tests/integration/test_repo_adapter.py](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/tests/integration/test_repo_adapter.py)  
+* **Status:** Pending
+
 ## **🛡️ 5. Definition of Done (DoD) for AI Iterations**
 
 An execution task is considered complete and ready to merge into main trunks only when it satisfies all constraints under this automated quality check:

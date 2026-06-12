@@ -93,11 +93,38 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
   * RICE Score: 150.0 (High Priority / Must Have) | Value: 5 / Effort: 2 / Reach: 100 / Impact: 3 / Confidence: 1.0  
   * Status: Done
 
+### **🔮 Phase 7: Sprint 2 - Recursos Avançados e Internacionalização (Backlog Futuro)**
+
+* **[TSK-12](TSK-12.md): Basic Language Menu Support (Menu de Idiomas Básico)**  
+  * Epic Link: FT-06 (Internationalization)  
+  * RICE Score: 80.0 (High Priority / Should Have) | Value: 4 / Effort: 1 / Reach: 100 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-13](TSK-13.md): Baking Recipes Engine (Dedução Automática por Receita)**  
+  * Epic Link: FT-07 (Recipes & Auto-deductions)  
+  * RICE Score: 70.0 (High Priority / Should Have) | Value: 5 / Effort: 3 / Reach: 70 / Impact: 3 / Confidence: 0.9  
+  * Status: To Do  
+* **[TSK-14](TSK-14.md): Batch Financial Controls (Custo de Aquisição e Perdas de Inventário)**  
+  * Epic Link: FT-08 (Financial Monitoring)  
+  * RICE Score: 64.0 (Medium Priority / Should Have) | Value: 4 / Effort: 2 / Reach: 80 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-15](TSK-15.md): Report Exporting Engine (Exportação PDF/CSV)**  
+  * Epic Link: FT-09 (Reporting & Exports)  
+  * RICE Score: 48.0 (Medium Priority / Could Have) | Value: 3 / Effort: 2 / Reach: 80 / Impact: 2 / Confidence: 0.8  
+  * Status: To Do  
+* **[TSK-16](TSK-16.md): Cloud Syncing Adapter (Sincronização Remota Backup Offline-First)**  
+  * Epic Link: FT-10 (Remote Synchronization)  
+  * RICE Score: 36.0 (Low Priority / Could Have) | Value: 3 / Effort: 3 / Reach: 60 / Impact: 2 / Confidence: 0.9  
+  * Status: To Do  
+
 ## **3\. 📋 Basic Markdown Kanban Board**
 
 ### **🔴 To Do (Ready for Development)**
 
-* None
+* [ ] **[TSK-12](TSK-12.md):** Basic Language Menu Support (Menu de Idiomas Básico)  
+* [ ] **[TSK-13](TSK-13.md):** Baking Recipes Engine (Dedução Automática por Receita)  
+* [ ] **[TSK-14](TSK-14.md):** Batch Financial Controls (Custo de Aquisição e Perdas de Inventário)  
+* [ ] **[TSK-15](TSK-15.md):** Report Exporting Engine (Exportação PDF/CSV)  
+* [ ] **[TSK-16](TSK-16.md):** Cloud Syncing Adapter (Sincronização Remota Backup Offline-First)  
 
 ### **🟡 In Progress (Actively Being Built)**
 

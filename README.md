@@ -100,6 +100,7 @@ Progress of the EstocaPão system foundation is tracked directly through the dev
 - [x] **Phase 4: Persistence Layer** — Json persistence adapters implementing atomic swap writes (`db_backup.tmp` ➔ `os.replace`).
 - [x] **Phase 5: CLI Routing & Logs** — Standard `argparse` controllers, high-contrast ANSI logs, and system logging to `estocapao.log`.
 - [x] **Phase 6: Distribution Packaging** — Executable command packaging via `pyproject.toml` enabling global `estocapao` command.
+- [ ] **Phase 7: Sprint 2 (Future Backlog)** — Basic language menu translation, baking recipes engine (FEFO), batch acquisition cost tracker, report exporter (PDF/CSV), and cloud sync backup.
 
 ---
 

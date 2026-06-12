@@ -112,6 +112,7 @@
   * Persistent database integration (SQL/NoSQL) to keep the MVP highly performant and focused on memory structures.  
   * Graphical User Interface (GUI), web, or mobile app development.  
   * Point of Sale (POS) operations, cash drawer management, and tax/invoice generation.
+  * **Sprint 2 Roadmap:** Language selection menu (PT-BR / EN), auto-deduction based on recipe formulations (Baking Recipes Engine), batch acquisition costs and loss dashboard, CSV/PDF printable reports export, and off-site cloud sync backups.
 
 ## **9\. 🔍 Operational Escalation & Blockers**
 

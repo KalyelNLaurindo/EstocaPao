@@ -134,6 +134,14 @@ Based on Scenario-Based Requirements Engineering (SBRE) and MoSCoW prioritizatio
 - ❌ Direct Point of Sale (POS) register integrations, ticket printing, and financial ledger handling.
 - ❌ Machine learning or AI-driven supplier replenishment automation.
 
+### **6.3. Sprint 2 Backlog (Future Roadmap)**
+To address advanced business needs post-MVP, the following features are mapped to the future release backlog:
+- **Language Localization (TSK-12):** Basic menu translation support (PT-BR / EN) via command-line flags or configuration setups.
+- **Formulation Deductions (TSK-13):** Baking Recipes Engine for subtracting multiple ingredients automatically from available FEFO lots.
+- **Inventory Valuation (TSK-14):** Cost of acquisition tracker to audit waste and calculate financial losses from quarantined items.
+- **Reporting Exports (TSK-15):** Premium formatted CSV and PDF exporter tools for external kitchen audits.
+- **Cloud Replication (TSK-16):** Lightweight, background cloud sync utility for remote off-site DRP backups.
+
 ## **🎯 7. Validation Strategy & Success Metrics**
 
 ### **7.1. North Star Metric**

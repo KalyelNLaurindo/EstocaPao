@@ -134,6 +134,18 @@ The codebase is organized modularly to enable a frictionless migration to a clie
 * **Database Migration:** The existing repository interface (IInventoryRepository) abstracts storage details. Moving to a relational database (e.g., PostgreSQL via SQLAlchemy) simply requires creating a new adapter class that implements the port interface—zero modifications to domain entities are needed.  
 * **REST API Extraction:** The application use cases can be wrapped inside web routers (such as FastAPI) in under a day, exposing JSON endpoints to support multi-terminal web and mobile applications on kitchen tablets.
 
+### **Sprint 2 Incremental Evolution (Planned Future Features)**
+
+The following Sprint 2 tasks extend existing boundaries without breaking the Hexagonal Architecture isolation:
+
+| Feature | Target Module | Architectural Impact |
+| :--- | :--- | :--- |
+| **TSK-12 — Language Menu (I18n)** | `estocapao/shared/i18n.py` (new) | New shared utility translating CLI strings based on `config.ini` locale config. Zero domain impact. |
+| **TSK-13 — Baking Recipes Engine** | `estocapao/modules/inventory/domain/recipe.py` (new) | New `RecipeEntity` and `BakeUseCase`. Calls existing `UpdateStockUseCase` in FEFO batch order. |
+| **TSK-14 — Batch Financial Controls** | `estocapao/modules/inventory/domain/value.py` | Add optional `unit_cost` field to `BatchValueObject`. Cost aggregation computed in `GetInventoryStatusUseCase`. |
+| **TSK-15 — Report Exporting Engine** | `estocapao/modules/inventory/infra/exporter.py` (new) | New outbound adapter `ReportExporterAdapter` implementing a new `IReportExporter` port. No domain changes. |
+| **TSK-16 — Cloud Syncing Backup** | `estocapao/modules/inventory/infra/cloud.py` (new) | New outbound adapter `CloudSyncAdapter` calling external HTTP APIs behind the existing `IInventoryRepository` boundary. |
+
 ## **📐 5. System Component Diagram (C4 Model — Level 3: Inside Core Backend App)**
 
 This diagram details the internal structural components of the core EstocaPão command-line process.
