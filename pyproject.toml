@@ -17,3 +17,6 @@ dependencies = []
 
 [project.scripts]
 estocapao = "estocapao.modules.inventory.infra.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

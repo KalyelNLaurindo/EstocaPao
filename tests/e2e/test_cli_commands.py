@@ -21,6 +21,15 @@ class TestCLIE2E(unittest.TestCase):
 
         self.env = os.environ.copy()
         self.env["PYTHONPATH"] = self.src_dir
+        if sys.platform == "win32":
+            user_scripts = os.path.join(
+                os.environ.get("APPDATA", ""),
+                "Python",
+                f"Python{sys.version_info.major}{sys.version_info.minor}",
+                "Scripts"
+            )
+            if os.path.exists(user_scripts):
+                self.env["PATH"] = user_scripts + os.pathsep + self.env.get("PATH", "")
 
     def tearDown(self):
         self.temp_dir.cleanup()
@@ -140,6 +149,44 @@ class TestCLIE2E(unittest.TestCase):
         self.assertNotEqual(res4.returncode, 0)
         self.assertIn("insuficiente", res4.stdout.lower() + res4.stderr.lower())
         self.assertNotIn("traceback", res4.stdout.lower() + res4.stderr.lower())
+
+    def test_scenario_6_global_executable_command(self):
+        """Scenario 6: Verify that the global 'estocapao' command executes successfully or skips if not installed."""
+        cmd_name = "estocapao.exe" if sys.platform == "win32" else "estocapao"
+        
+        user_scripts = ""
+        if sys.platform == "win32":
+            user_scripts = os.path.join(
+                os.environ.get("APPDATA", ""),
+                "Python",
+                f"Python{sys.version_info.major}{sys.version_info.minor}",
+                "Scripts"
+            )
+        else:
+            import shutil
+            bin_path = shutil.which(cmd_name)
+            if bin_path:
+                user_scripts = os.path.dirname(bin_path)
+
+        executable_path = os.path.join(user_scripts, cmd_name) if user_scripts else cmd_name
+        
+        if not os.path.exists(executable_path):
+            import shutil
+            bin_path = shutil.which(cmd_name)
+            if bin_path:
+                executable_path = bin_path
+            else:
+                self.skipTest("Global 'estocapao' command not found in PATH. Please run 'pip install -e .' first.")
+
+        res = subprocess.run(
+            [executable_path, "--init"],
+            cwd=self.cwd,
+            env=self.env,
+            capture_output=True,
+            text=True
+        )
+        self.assertEqual(res.returncode, 0)
+        self.assertIn("Inicializado", res.stdout)
 
 if __name__ == "__main__":
     unittest.main()
