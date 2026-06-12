@@ -40,7 +40,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * **[TSK-02](TSK-02.md): Build Pure Domain Model - IngredientEntity & Stock Invariants**  
   * Epic Link: FT-02 (Bounded Domain Objects)  
   * RICE Score: 150.0 (High Priority / Must Have) | Value: 5 / Effort: 2 / Reach: 100 / Impact: 3 / Confidence: 1.0  
-  * Status: To Do
+  * Status: Done
 
 ### **⚙️ Phase 2: Application Use Cases (In-Memory Orchestration)**
 
@@ -97,7 +97,6 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🔴 To Do (Ready for Development)**
 
-* [ ] **[TSK-02](TSK-02.md):** Build Pure Domain Model - IngredientEntity & Stock Invariants  
 * [ ] **[TSK-03](TSK-03.md):** Create Core Use Cases: UpdateStock & GetInventoryStatus  
 * [ ] **[TSK-04](TSK-04.md):** Program Logical Quarantine Redirection and Expiration Gatekeeper  
 * [ ] **[TSK-05](TSK-05.md):** Implement Core Configuration Parser and Secure File Bootstrapping  
@@ -118,5 +117,6 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🟢 Done (Merged & Verified in Main Trunk)**
 
+* [x] **[TSK-02](TSK-02.md):** Build Pure Domain Model - IngredientEntity & Stock Invariants
 * [x] **[TSK-01](TSK-01.md):** Build Pure Domain Model - BatchValueObject
 * [x] **TSK-00:** Bootstrap project workspace directory layout and initial PEP8 configs
