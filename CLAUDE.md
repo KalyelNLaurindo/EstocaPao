@@ -106,7 +106,10 @@ estocapao-root/
 
 ## 🏷️ Code Governance & Naming Conventions
 
-Maintain strict compliance with PEP 8 and the following naming suffixes:
+Maintain strict compliance with PEP 8 and the following conventions:
+
+*   **Language & Style:** All inline comments, docstrings, and documentation must be written in English. Use clear, simple, and layperson-accessible wording so that non-technical users or developers can easily understand the purpose of the code.
+*   **Suffixes & Prefixes:**
 
 | Role / Pattern | Suffix / Prefix | Example Name |
 | :--- | :--- | :--- |

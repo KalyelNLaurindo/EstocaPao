@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local database files
+db_backup.json
+db_backup.json.bak
+db_backup.tmp
+
+# App logs
+estocapao.log
+
+# IDE files
+.vscode/
+.idea/
+.gemini/

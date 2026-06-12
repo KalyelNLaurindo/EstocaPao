@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "estocapao"
+version = "0.1.0"
+description = "High-Performance In-Memory Local CLI Inventory Engine for Artisanal Bakeries"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: :: OS Independent",
+]
+dependencies = []
+
+[project.scripts]
+estocapao = "estocapao.modules.inventory.infra.cli:main"
