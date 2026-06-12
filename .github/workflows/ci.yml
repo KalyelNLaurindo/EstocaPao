@@ -1,27 +1,113 @@
-name: Python Integration CI
+name: CI
 
 on:
   push:
-    branches: [ main, develop, feature ]
+    branches: [main]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
-    name: Run Test Suite
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 1: Code Quality Gate
+  # Runs fast static checks first so the matrix doesn't spin up for broken code.
+  # ─────────────────────────────────────────────────────────────────────────────
+  quality:
+    name: Quality Gate (lint + format)
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install quality tools
+        run: pip install pyflakes
+
+      - name: Run Pyflakes (zero-dependency linter)
+        run: python -m pyflakes src/
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 2: Test Matrix
+  # Runs the full test suite across all supported OS and Python combinations.
+  # Depends on `quality` passing to avoid wasting runner minutes.
+  # ─────────────────────────────────────────────────────────────────────────────
+  test:
+    name: Tests — Python ${{ matrix.python-version }} / ${{ matrix.os }}
+    needs: quality
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
-    - name: Run Unit Tests
-      env:
-        PYTHONPATH: src
-      run: |
-        python -m unittest discover -s tests/unit
+      - name: Install package in editable mode
+        run: pip install -e .
+
+      - name: Run unit tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests/unit -v
+
+      - name: Run integration tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests/integration -v
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Job 3: Build Verification
+  # Validates that the distribution package is buildable from a clean state.
+  # Runs only on pushes to main (not on PRs) to keep feedback loops fast.
+  # ─────────────────────────────────────────────────────────────────────────────
+  build:
+    name: Build Verification
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install build toolchain
+        run: pip install build
+
+      - name: Build source distribution and wheel
+        run: python -m build
+
+      - name: Verify package contents
+        run: |
+          pip install dist/*.whl
+          estocapao --help
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-packages
+          path: dist/
+          retention-days: 7

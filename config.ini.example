@@ -1,0 +1,24 @@
+# EstocaPão — Configuration Template
+# ─────────────────────────────────────────────────────────────────────────────
+# Copy this file to `config.ini` and adjust values for your environment.
+# `config.ini` is gitignored and never committed to the repository.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[database]
+# Absolute or relative path to the JSON persistence file.
+# On first run (estocapao --init), this file is created automatically.
+path = db_backup.json
+
+[logging]
+# Log verbosity: DEBUG | INFO | WARNING | ERROR | CRITICAL
+level = INFO
+
+# Absolute or relative path to the rotating log file.
+file = estocapao.log
+
+[inventory]
+# Number of days before expiration that triggers an "expiring soon" warning.
+expiry_warning_days = 3
+
+# Minimum safe stock quantity. Ingredients below this threshold are flagged.
+safety_threshold = 5

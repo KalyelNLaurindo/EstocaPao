@@ -1,25 +1,49 @@
-# Python cache
+# ─── Python cache ────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
 
-# Local database files
-db_backup.json
-db_backup.json.bak
-db_backup.tmp
-
-# App logs
-estocapao.log
-
-# IDE files
-.vscode/
-.idea/
-.gemini/
-
-# Claude reference guide
-CLAUDE.md
-
-# Packaging and build directories
+# ─── Distribution / packaging ────────────────────────────────────────────────
 *.egg-info/
 build/
 dist/
+*.whl
+*.tar.gz
+MANIFEST
+
+# ─── Testing & coverage ──────────────────────────────────────────────────────
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.pytest_cache/
+junit*.xml
+
+# ─── Type checkers ───────────────────────────────────────────────────────────
+.mypy_cache/
+.pytype/
+.pyrefly_cache/
+
+# ─── Local runtime data (machine-specific) ───────────────────────────────────
+config.ini
+db_backup.json
+db_backup.json.bak
+db_backup.tmp
+estocapao.log
+*.log
+
+# ─── IDE & editor files ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+.gemini/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── Agent guide (local dev tooling, not part of published project) ──────────
+CLAUDE.md

@@ -8,6 +8,9 @@
 [![Testing Paradigm](https://img.shields.io/badge/Testing-TDD--First-green?style=for-the-badge&logo=pytest&logoColor=white)](https://en.wikipedia.org/wiki/Test-driven_development)
 [![Code Style](https://img.shields.io/badge/Code%20Style-PEP%208-orange?style=for-the-badge)](https://peps.python.org/pep-0008/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)
+[![CI](https://github.com/KalyelNLaurindo/estocapao/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/KalyelNLaurindo/estocapao/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
 
 ---
 
