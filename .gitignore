@@ -15,3 +15,6 @@ estocapao.log
 .vscode/
 .idea/
 .gemini/
+
+# Claude reference guide
+CLAUDE.md
