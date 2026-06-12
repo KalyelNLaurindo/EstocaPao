@@ -5,7 +5,8 @@ from typing import Dict, Optional
 from estocapao.modules.inventory.domain.entity import IngredientEntity
 from estocapao.modules.inventory.domain.ports import IInventoryRepository
 from estocapao.modules.inventory.domain.value import BatchValueObject
-from estocapao.bootstrap.initializer import secure_file_permissions, validate_database_schema
+from estocapao.bootstrap.initializer import secure_file_permissions, validate_database_schema, InvalidSchemaError
+from estocapao.shared.logger import log_action
 
 
 class LocalJsonRepositoryAdapter(IInventoryRepository):
@@ -21,8 +22,33 @@ class LocalJsonRepositoryAdapter(IInventoryRepository):
         if not os.path.exists(self.db_path):
             return
 
-        # Perform structural schema check
-        validate_database_schema(self.db_path)
+        try:
+            validate_database_schema(self.db_path)
+        except InvalidSchemaError:
+            log_action("WARNING", "Banco de dados principal corrompido. Tentando restaurar a partir do backup.")
+            bak_path = self.db_path + ".bak"
+            bak_valid = False
+            if os.path.exists(bak_path):
+                try:
+                    validate_database_schema(bak_path)
+                    bak_valid = True
+                except InvalidSchemaError:
+                    pass
+            
+            if bak_valid:
+                try:
+                    os.replace(bak_path, self.db_path)
+                    log_action("INFO", "Banco de dados restaurado com sucesso a partir do backup.")
+                except Exception:
+                    bak_valid = False
+            
+            if not bak_valid:
+                try:
+                    with open(self.db_path, "w", encoding="utf-8") as f:
+                        f.write("{}")
+                    log_action("ERROR", "Banco de dados e backup corrompidos/ausentes. Inicializando banco de dados limpo.")
+                except Exception:
+                    pass
 
         try:
             with open(self.db_path, "r", encoding="utf-8") as f:
@@ -56,7 +82,7 @@ class LocalJsonRepositoryAdapter(IInventoryRepository):
                 
                 self._memory_cache[ing_id] = entity
         except Exception:
-            raise
+            pass
 
     def save(self, ingredient: IngredientEntity) -> None:
         """Saves the ingredient details to the JSON file safely, avoiding data loss if the computer crashes."""

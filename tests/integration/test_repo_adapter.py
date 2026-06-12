@@ -118,5 +118,105 @@ class TestLocalJsonRepositoryAdapter(unittest.TestCase):
         tmp_path = self.db_path + ".tmp"
         self.assertFalse(os.path.exists(tmp_path))
 
+    def test_scenario_4_recovery_from_bak(self):
+        """Scenario 4: Recovery from .bak when main json is corrupted."""
+        valid_data = {
+            "FL-001": {
+                "id": "FL-001",
+                "name": "Wheat Flour",
+                "safety_threshold": 10.0,
+                "batches": [
+                    {
+                        "batch_id": "LOT-1",
+                        "quantity": 10.0,
+                        "expiration_date": "2026-12-31",
+                        "received_date": "2026-06-12"
+                    }
+                ],
+                "quarantine_batches": []
+            }
+        }
+        import json
+        with open(self.bak_path, "w", encoding="utf-8") as f:
+            json.dump(valid_data, f)
+        
+        # Corrupted data in main db file
+        with open(self.db_path, "w", encoding="utf-8") as f:
+            f.write("corrupted JSON data {")
+            
+        # Instantiate repo
+        repo = LocalJsonRepositoryAdapter(self.db_path)
+        
+        # Assert database loaded from .bak
+        flour = repo.find_by_id("FL-001")
+        self.assertIsNotNone(flour)
+        self.assertEqual(flour.name, "Wheat Flour") # type: ignore
+        self.assertEqual(flour.get_total_quantity(), 10.0) # type: ignore
+        
+        # Main db file should be restored and valid now
+        self.assertTrue(os.path.exists(self.db_path))
+        with open(self.db_path, "r", encoding="utf-8") as f:
+            loaded_data = json.load(f)
+        self.assertIn("FL-001", loaded_data)
+        
+        # The bak file should have been moved/replaced
+        self.assertFalse(os.path.exists(self.bak_path))
+
+    def test_scenario_5_recovery_to_empty(self):
+        """Scenario 5: Full recovery to empty database when both main and .bak are corrupted."""
+        # Corrupted data in both files
+        with open(self.db_path, "w", encoding="utf-8") as f:
+            f.write("{corrupt main}")
+        with open(self.bak_path, "w", encoding="utf-8") as f:
+            f.write("{corrupt backup}")
+            
+        # Instantiate repo (should not raise exception)
+        repo = LocalJsonRepositoryAdapter(self.db_path)
+        
+        # Should initialize empty cache
+        self.assertEqual(len(repo.get_all()), 0)
+        
+        # Main file should be an empty dictionary
+        self.assertTrue(os.path.exists(self.db_path))
+        with open(self.db_path, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+        self.assertEqual(content, "{}")
+
+    def test_scenario_6_recovery_logs_auditing(self):
+        """Scenario 6: Verify audit logs are appended to estocapao.log during recovery actions."""
+        log_file = "estocapao.log"
+        initial_lines = 0
+        if os.path.exists(log_file):
+            with open(log_file, "r", encoding="utf-8") as f:
+                initial_lines = len(f.readlines())
+                
+        # Trigger Scenario 4 Recovery
+        import json
+        with open(self.bak_path, "w", encoding="utf-8") as f:
+            json.dump({}, f)
+        with open(self.db_path, "w", encoding="utf-8") as f:
+            f.write("corrupt db")
+            
+        _ = LocalJsonRepositoryAdapter(self.db_path)
+        
+        # Trigger Scenario 5 Recovery
+        with open(self.bak_path, "w", encoding="utf-8") as f:
+            f.write("corrupt bak")
+        with open(self.db_path, "w", encoding="utf-8") as f:
+            f.write("corrupt db")
+            
+        _ = LocalJsonRepositoryAdapter(self.db_path)
+        
+        self.assertTrue(os.path.exists(log_file))
+        with open(log_file, "r", encoding="utf-8") as f:
+            all_lines = f.readlines()
+            
+        new_lines = all_lines[initial_lines:]
+        log_content = "".join(new_lines)
+        
+        self.assertIn("Banco de dados principal corrompido. Tentando restaurar a partir do backup.", log_content)
+        self.assertIn("Banco de dados restaurado com sucesso a partir do backup.", log_content)
+        self.assertIn("Banco de dados e backup corrompidos/ausentes. Inicializando banco de dados limpo.", log_content)
+
 if __name__ == "__main__":
     unittest.main()
