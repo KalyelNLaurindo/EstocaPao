@@ -1,5 +1,6 @@
 """This module represents a baking ingredient in the bakery's inventory, like flour or yeast."""
-from typing import List
+from datetime import date
+from typing import List, Optional
 from estocapao.modules.inventory.domain.value import BatchValueObject, DomainValidationError
 
 class InsufficientStockError(DomainValidationError):
@@ -19,12 +20,37 @@ class IngredientEntity:
         self.name = name
         self.safety_threshold = float(safety_threshold)  # The minimum amount we should keep in stock before warning the user
         self.batches: List[BatchValueObject] = []  # List of different batches/lots of this ingredient
+        self.quarantine_batches: List[BatchValueObject] = []  # List of quarantined/expired batches of this ingredient
 
     def add_batch(self, batch: BatchValueObject) -> None:
         """Adds an incoming batch (lot) to the ingredient's stock."""
         if not isinstance(batch, BatchValueObject):
             raise TypeError("Only BatchValueObject instances can be added to batches.")
         self.batches.append(batch)
+
+    def add_quarantine_batch(self, batch: BatchValueObject) -> None:
+        """Adds an incoming batch (lot) directly to the ingredient's quarantined stock."""
+        if not isinstance(batch, BatchValueObject):
+            raise TypeError("Only BatchValueObject instances can be added to quarantine batches.")
+        self.quarantine_batches.append(batch)
+
+    def quarantine_expired_batches(self, system_date: date) -> List[BatchValueObject]:
+        """Moves batches that are expired relative to the system_date into quarantine."""
+        if not isinstance(system_date, date):
+            raise TypeError("System date must be a datetime.date instance.")
+        
+        expired = [b for b in self.batches if b.expiration_date <= system_date]
+        if expired:
+            self.batches = [b for b in self.batches if b.expiration_date > system_date]
+            self.quarantine_batches.extend(expired)
+        return expired
+
+    def remove_quarantine_batch(self, batch_id: str) -> Optional[BatchValueObject]:
+        """Removes a batch from quarantine by its batch_id and returns it, if found."""
+        for i, batch in enumerate(self.quarantine_batches):
+            if batch.batch_id == batch_id:
+                return self.quarantine_batches.pop(i)
+        return None
 
     def get_total_quantity(self) -> float:
         """Sum up the total quantity across all active batches of this ingredient."""

@@ -51,7 +51,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * **[TSK-04](TSK-04.md): Program Logical Quarantine Redirection and Expiration Gatekeeper**  
   * Epic Link: FT-03 (Use Case Interactors)  
   * RICE Score: 56.0 (Medium Priority / Must Have) | Value: 4 / Effort: 2 / Reach: 70 / Impact: 2 / Confidence: 0.8  
-  * Status: To Do
+  * Status: Done
 
 ### **📂 Phase 3: Infrastructure - Configurations & Verification Setup**
 
@@ -97,7 +97,6 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🔴 To Do (Ready for Development)**
 
-* [ ] **[TSK-04](TSK-04.md):** Program Logical Quarantine Redirection and Expiration Gatekeeper  
 * [ ] **[TSK-05](TSK-05.md):** Implement Core Configuration Parser and Secure File Bootstrapping  
 * [ ] **[TSK-06](TSK-06.md):** Secure File Permission Locks & Structural Scheme Validator  
 * [ ] **[TSK-07](TSK-07.md):** Develop LocalJsonRepositoryAdapter & Atomic Write Protocol  
@@ -108,7 +107,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🟡 In Progress (Actively Being Built)**
 
-* None (Awaiting sprint planning sign-off)
+* None
 
 ### **🔵 In Review (QA & Test Verification)**
 
@@ -116,6 +115,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🟢 Done (Merged & Verified in Main Trunk)**
 
+* [x] **[TSK-04](TSK-04.md):** Program Logical Quarantine Redirection and Expiration Gatekeeper  
 * [x] **[TSK-03](TSK-03.md):** Create Core Use Cases: UpdateStock & GetInventoryStatus
 * [x] **[TSK-02](TSK-02.md):** Build Pure Domain Model - IngredientEntity & Stock Invariants
 * [x] **[TSK-01](TSK-01.md):** Build Pure Domain Model - BatchValueObject

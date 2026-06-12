@@ -5,6 +5,7 @@ from datetime import date
 from typing import Union
 from estocapao.modules.inventory.domain.ports import IInventoryRepository
 from estocapao.modules.inventory.domain.value import BatchValueObject
+from estocapao.modules.inventory.app.quarantine import QuarantineManager
 
 class UpdateStockUseCase:
     """Action that adds new batches or updates existing stock counts of an ingredient in the repository."""
@@ -58,11 +59,18 @@ class UpdateStockUseCase:
 class GetInventoryStatusUseCase:
     """Action that checks current stock amounts and warns about low items or items near expiration."""
 
-    def __init__(self, repository: IInventoryRepository):
+    def __init__(self, repository: IInventoryRepository, quarantine_manager: QuarantineManager = None):
         self.repository = repository
+        self.quarantine_manager = quarantine_manager or QuarantineManager(repository)
 
-    def execute(self) -> dict:
+    def execute(self, system_date: date = None) -> dict:
         """Checks the stock and returns a report list of ingredients and warning messages."""
+        if system_date is None:
+            system_date = date.today()
+
+        # Automatically trigger quarantine scanning/isolation on inventory query
+        self.quarantine_manager.quarantine_expired_batches(system_date)
+
         ingredients = self.repository.get_all()
         report = {}
         for ing_id, ing in ingredients.items():
