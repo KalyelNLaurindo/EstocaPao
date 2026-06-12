@@ -62,7 +62,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * **[TSK-06](TSK-06.md): Secure File Permission Locks & Structural Scheme Validator**  
   * Epic Link: FT-01 & FT-04 (File Setup & Safe Persistence)  
   * RICE Score: 80.0 (High Priority / Must Have) | Value: 4 / Effort: 2 / Reach: 80 / Impact: 2 / Confidence: 1.0  
-  * Status: To Do
+  * Status: Done
 
 ### **💾 Phase 4: Infrastructure - Persistence & Data Safety**
 
@@ -97,7 +97,6 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🔴 To Do (Ready for Development)**
 
-* [ ] **[TSK-06](TSK-06.md):** Secure File Permission Locks & Structural Scheme Validator  
 * [ ] **[TSK-07](TSK-07.md):** Develop LocalJsonRepositoryAdapter & Atomic Write Protocol  
 * [ ] **[TSK-08](TSK-08.md):** Create Self-Healing Schema Recovery and Disaster Recovery DRP Suite  
 * [ ] **[TSK-09](TSK-09.md):** Build CommandLineInterfaceParser and Command Arguments Router  
@@ -114,6 +113,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 
 ### **🟢 Done (Merged & Verified in Main Trunk)**
 
+* [x] **[TSK-06](TSK-06.md):** Secure File Permission Locks & Structural Scheme Validator  
 * [x] **[TSK-05](TSK-05.md):** Implement Core Configuration Parser and Secure File Bootstrapping  
 * [x] **[TSK-04](TSK-04.md):** Program Logical Quarantine Redirection and Expiration Gatekeeper  
 * [x] **[TSK-03](TSK-03.md):** Create Core Use Cases: UpdateStock & GetInventoryStatus

@@ -2,6 +2,8 @@
 It connects our core business logic to the actual components that handle files or terminal commands.
 """
 import os
+import stat
+import json
 import configparser
 
 DEFAULT_CONFIG_CONTENT = """[system_defaults]
@@ -13,6 +15,11 @@ passcode_sha256_hash = e99a18c428cb38d5f260853678922e03f88ef685652e00845a72233f5
 expiration_alert_days_window = 3
 low_stock_default_kg_limit = 5.0
 """
+
+
+class InvalidSchemaError(ValueError):
+    """Raised when the database JSON file structure is malformed or invalid."""
+    pass
 
 
 class SystemConfig:
@@ -33,6 +40,78 @@ class SystemConfig:
         self.low_stock_default_kg_limit = low_stock_default_kg_limit
 
 
+def secure_file_permissions(file_path: str) -> None:
+    """Applies restrictive permissions (chmod 600 / owner read-write only) on POSIX environments."""
+    if os.name == "posix":
+        try:
+            os.chmod(file_path, stat.S_IRUSR | stat.S_IWUSR)
+        except Exception:
+            pass  # Clean fallback if permissions cannot be set
+
+
+def validate_database_schema(db_path: str) -> None:
+    """Validates the structural integrity of the database JSON file.
+    Raises InvalidSchemaError if the schema is malformed or missing mandatory fields.
+    """
+    if not os.path.exists(db_path):
+        return  # Missing file is fine, it will be created empty
+
+    try:
+        with open(db_path, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+        
+        # Empty file is malformed (should be at least {} if initialized, or non-empty if it exists)
+        if not content:
+            raise InvalidSchemaError("Database file is empty.")
+            
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        raise InvalidSchemaError(f"Database contains malformed JSON: {e}") from e
+    except InvalidSchemaError:
+        raise
+    except Exception as e:
+        raise InvalidSchemaError(f"Failed to read database file: {e}") from e
+
+    if not isinstance(data, dict):
+        raise InvalidSchemaError("Database root must be a JSON object (dict).")
+
+    for ing_id, ing in data.items():
+        if not isinstance(ing, dict):
+            raise InvalidSchemaError(f"Ingredient '{ing_id}' must be a JSON object (dict).")
+        
+        for key in ("id", "name", "safety_threshold", "batches"):
+            if key not in ing:
+                raise InvalidSchemaError(f"Ingredient '{ing_id}' is missing mandatory key: '{key}'.")
+        
+        if not isinstance(ing["id"], str):
+            raise InvalidSchemaError(f"Ingredient '{ing_id}' id must be a string.")
+        if not isinstance(ing["name"], str):
+            raise InvalidSchemaError(f"Ingredient '{ing_id}' name must be a string.")
+        if not isinstance(ing["safety_threshold"], (int, float)):
+            raise InvalidSchemaError(f"Ingredient '{ing_id}' safety_threshold must be a number.")
+        if not isinstance(ing["batches"], list):
+            raise InvalidSchemaError(f"Ingredient '{ing_id}' batches must be a list (array).")
+
+        # Validate batches structure
+        for i, batch in enumerate(ing["batches"]):
+            if not isinstance(batch, dict):
+                raise InvalidSchemaError(f"Batch {i} in ingredient '{ing_id}' must be a JSON object (dict).")
+            for bkey in ("batch_id", "quantity", "expiration_date", "received_date"):
+                if bkey not in batch:
+                    raise InvalidSchemaError(f"Batch {i} in ingredient '{ing_id}' is missing key: '{bkey}'.")
+
+        # Validate quarantine_batches if present
+        if "quarantine_batches" in ing:
+            if not isinstance(ing["quarantine_batches"], list):
+                raise InvalidSchemaError(f"Ingredient '{ing_id}' quarantine_batches must be a list (array).")
+            for i, batch in enumerate(ing["quarantine_batches"]):
+                if not isinstance(batch, dict):
+                    raise InvalidSchemaError(f"Quarantined batch {i} in ingredient '{ing_id}' must be a JSON object (dict).")
+                for bkey in ("batch_id", "quantity", "expiration_date", "received_date"):
+                    if bkey not in batch:
+                        raise InvalidSchemaError(f"Quarantined batch {i} in ingredient '{ing_id}' is missing key: '{bkey}'.")
+
+
 def load_config(config_path: str = "config.ini") -> SystemConfig:
     """Loads system configuration settings from the ini file. Auto-heals if missing or malformed."""
     config = configparser.ConfigParser()
@@ -45,6 +124,7 @@ def load_config(config_path: str = "config.ini") -> SystemConfig:
         try:
             with open(config_path, "w", encoding="utf-8") as f:
                 f.write(DEFAULT_CONFIG_CONTENT)
+            secure_file_permissions(config_path)
         except Exception:
             # If writing fails, return standard default configuration object
             return SystemConfig()
@@ -100,6 +180,14 @@ def load_config(config_path: str = "config.ini") -> SystemConfig:
         return SystemConfig()
 
 
-def initialize_dependencies(config_path: str = "config.ini") -> SystemConfig:
+def initialize_dependencies(config_path: str = "config.ini", db_path: str = "db_backup.json") -> SystemConfig:
     """Prepares and connects all system modules so the application is ready to run."""
-    return load_config(config_path)
+    config = load_config(config_path)
+    secure_file_permissions(config_path)
+
+    if db_path:
+        validate_database_schema(db_path)
+        if os.path.exists(db_path):
+            secure_file_permissions(db_path)
+
+    return config
