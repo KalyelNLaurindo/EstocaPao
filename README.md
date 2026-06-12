@@ -182,46 +182,67 @@ estocapao-root/
 
 ---
 
-## **💻 8. Local Engineering Development Setup**
+## **💻 8. Installation & Quick Start**
 
-### **8.1. Core System Prerequisites**
+> 💡 **Primeira vez usando?** Veja o [GUIA_RAPIDO.md](GUIA_RAPIDO.md) com instruções em português passo a passo.
 
-- Python 3.10+ Environment (Strictly utilizing Python Standard Libraries).
-- Sufficient operating system permissions to read/write files locally within the program directory.
-- A standard terminal shell environment supporting ANSI escape codes.
+### **8.1. Prerequisites**
 
-### **8.2. Initial Bootstrap Sequence**
+| Requirement | Minimum Version | Check Command |
+| :--- | :--- | :--- |
+| Python | 3.10+ | `python --version` |
+| pip | bundled with Python | `pip --version` |
+| OS terminal | Windows PowerShell, macOS Terminal, or Linux Bash | — |
 
-1. Clone this repository locally to your local development workspace:
-   ```bash
-   git clone https://github.com/your-org/estocapao.git
-   cd estocapao
-   ```
-2. Bootstrap the configuration files and initial environment paths:
-   ```bash
-   python src/main.py --init
-   ```
-3. Launch the interactive CLI to check current stock status and active system alert flags:
-   ```bash
-   python src/main.py status
-   ```
-4. Update or append an active bakery ingredient batch directly from the terminal:
-   ```bash
-   python src/main.py update flour 15.0 --exp "2026-07-20"
-   ```
+No third-party libraries are required. EstocaPão runs entirely on the Python Standard Library.
 
-### **8.3. Automated Verification Commands**
+### **8.2. End-User Install (5 minutes)**
 
-Ensure your modifications pass the repository quality gates before submitting a Pull Request:
+```bash
+# 1. Clone the repository
+git clone https://github.com/KalyelNLaurindo/estocapao.git
+cd estocapao
 
-- **Execute full testing matrix (Unit, Integration, and E2E)**:
-  ```bash
-  python -m unittest discover -s tests
-  ```
-- **Verify Clean Architecture import guardrails**:
-  ```bash
-  python scripts/verify_boundaries.py
-  ```
+# 2. Install the package (adds the global `estocapao` command)
+pip install .
+
+# 3. Copy the config template
+copy config.ini.example config.ini      # Windows PowerShell
+# cp config.ini.example config.ini      # macOS / Linux
+
+# 4. First run — creates database and log files
+estocapao --init
+
+# 5. See current stock
+estocapao status
+```
+
+### **8.3. Daily Workflow — Real Shift Example**
+
+```bash
+# New ingredient lot arriving at the bakery (25.5 kg of flour, expires Jul 20, alert below 10 kg)
+estocapao add farinha 25.5 --exp 2026-07-20 --limit 10
+
+# Consume 3 kg after the morning batch
+estocapao update farinha -3
+
+# Check stock levels (shows warnings for low/expired items)
+estocapao status
+
+# Quarantine a damaged or expired batch
+estocapao discard farinha
+```
+
+### **8.4. Developer Setup**
+
+```bash
+# Install in editable mode (code changes in src/ take effect immediately)
+pip install -e .
+
+# Run the full test suite (55 tests: unit + integration)
+python -m unittest discover -s tests -v
+```
+
 
 ---
 
