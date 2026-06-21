@@ -167,6 +167,21 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
   * RICE Score: 180.0 (High Priority / Should Have) | Value: 4 / Effort: 1 / Reach: 90 / Impact: 2 / Confidence: 1.0  
   * Status: To Do  
 
+* **[TSK-28](TSK-28.md): i18n File Registry & Config Parser**  
+  * Epic Link: FT-06 (Internationalization)  
+  * RICE Score: 72.0 (High Priority / Should Have) | Value: 4 / Effort: 2 / Reach: 90 / Impact: 2 / Confidence: 0.8  
+  * Status: To Do  
+
+* **[TSK-29](TSK-29.md): Localization of CLI Presenter & Unicode Table Strings**  
+  * Epic Link: FT-06 (Internationalization)  
+  * RICE Score: 72.0 (High Priority / Should Have) | Value: 4 / Effort: 2 / Reach: 90 / Impact: 2 / Confidence: 0.8  
+  * Status: To Do  
+
+* **[TSK-30](TSK-30.md): Layperson Interactive Prompts & Validation Badges**  
+  * Epic Link: FT-11 (UX Terminal & Onboarding)  
+  * RICE Score: 213.75 (High Priority / Should Have) | Value: 5 / Effort: 1 / Reach: 95 / Impact: 2.5 / Confidence: 0.9  
+  * Status: To Do  
+
 
 
 ## **3\. 📋 Basic Markdown Kanban Board**
@@ -193,7 +208,10 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * [ ] **[TSK-24](TSK-24.md):** Supplier Batch Traceability Logger (Rastreabilidade de Lotes por Fornecedor)  
 * [ ] **[TSK-25](TSK-25.md):** Ingredient Expiration Purge Scheduler (Quarentena Automática de Ingredientes Vencidos)  
 * [ ] **[TSK-26](TSK-26.md):** Production Yield Calculator (Calculadora de Rendimento de Produção)  
-* [ ] **[TSK-27](TSK-27.md):** Isolate Domain Exceptions in Dedicated Module  
+* [ ] **[TSK-27](TSK-27.md):** Isolate Domain Exceptions in Dedicated Module
+* [ ] **[TSK-28](TSK-28.md):** i18n File Registry & Config Parser (2 SP)
+* [ ] **[TSK-29](TSK-29.md):** Localization of CLI Presenter & Unicode Table Strings (2 SP)
+* [ ] **[TSK-30](TSK-30.md):** Layperson Interactive Prompts & Validation Badges (1 SP)
 
 
 
