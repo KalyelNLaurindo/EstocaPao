@@ -143,6 +143,32 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
   * RICE Score: 90.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 90 / Impact: 2 / Confidence: 1.0  
   * Status: To Do  
 
+### **🔗 Phase 9: Integração de Dados, Telemetria & Automação de Compras (Backlog Futuro)**
+
+* **[TSK-23](TSK-23.md): Low-Stock Threshold Alert Engine (Motor de Alertas de Estoque Mínimo)**  
+  * Epic Link: FT-14 (Alerts & Inventory Intelligence)  
+  * RICE Score: 90.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 90 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-24](TSK-24.md): Supplier Batch Traceability Logger (Rastreabilidade de Lotes por Fornecedor)**  
+  * Epic Link: FT-15 (Traceability & Compliance)  
+  * RICE Score: 72.0 (High Priority / Should Have) | Value: 4 / Effort: 2 / Reach: 90 / Impact: 2 / Confidence: 0.8  
+  * Status: To Do  
+* **[TSK-25](TSK-25.md): Ingredient Expiration Purge Scheduler (Quarentena Automática de Ingredientes Vencidos)**  
+  * Epic Link: FT-16 (Lifecycle Management)  
+  * RICE Score: 64.0 (Medium Priority / Should Have) | Value: 4 / Effort: 2 / Reach: 80 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+* **[TSK-26](TSK-26.md): Production Yield Calculator (Calculadora de Rendimento de Produção)**  
+  * Epic Link: FT-17 (Analytics & Pricing Intelligence)  
+  * RICE Score: 56.0 (Medium Priority / Could Have) | Value: 3 / Effort: 2 / Reach: 70 / Impact: 2 / Confidence: 0.8  
+  * Status: To Do  
+
+* **[TSK-27](TSK-27.md): Isolate Domain Exceptions in Dedicated Module**  
+  * Epic Link: FT-02 (Bounded Domain Objects / Refactor)  
+  * RICE Score: 180.0 (High Priority / Should Have) | Value: 4 / Effort: 1 / Reach: 90 / Impact: 2 / Confidence: 1.0  
+  * Status: To Do  
+
+
+
 ## **3\. 📋 Basic Markdown Kanban Board**
 
 ### **🔴 To Do (Ready for Development)**
@@ -161,6 +187,15 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * [ ] **[TSK-20](TSK-20.md):** Malicious Input & Edge Case Hardening (Proteção contra Entradas Maliciosas)  
 * [ ] **[TSK-21](TSK-21.md):** Elegant Field Control & Auto-formatting (Controle de Campos Elegante e Auto-formatação)  
 * [ ] **[TSK-22](TSK-22.md):** Structured Audit Logging Coverage (Cobertura Completa de Logs de Auditoria)  
+
+**Phase 9 — Integração de Dados, Telemetria & Automação de Compras**
+* [ ] **[TSK-23](TSK-23.md):** Low-Stock Threshold Alert Engine (Motor de Alertas de Estoque Mínimo)  
+* [ ] **[TSK-24](TSK-24.md):** Supplier Batch Traceability Logger (Rastreabilidade de Lotes por Fornecedor)  
+* [ ] **[TSK-25](TSK-25.md):** Ingredient Expiration Purge Scheduler (Quarentena Automática de Ingredientes Vencidos)  
+* [ ] **[TSK-26](TSK-26.md):** Production Yield Calculator (Calculadora de Rendimento de Produção)  
+* [ ] **[TSK-27](TSK-27.md):** Isolate Domain Exceptions in Dedicated Module  
+
+
 
 ### **🟡 In Progress (Actively Being Built)**
 

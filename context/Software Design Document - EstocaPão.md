@@ -377,10 +377,12 @@ estocapao-root/
 │   │   │  
 │   │   ├── modules/              # Subsystem domains & bounded contexts  
 │   │   │   └── inventory/        # Primary inventory module  
-│   │   │       ├── domain/       # Core business logic (entities, value objects, ports)  
+│   │   │       ├── domain/       # Core business logic (entities, value objects, ports, exceptions)  
 │   │   │       │   ├── entity.py # IngredientEntity logic  
 │   │   │       │   ├── value.py  # BatchValueObject logic  
+│   │   │       │   ├── exceptions.py # Custom domain exceptions (DomainValidationError, etc.)  
 │   │   │       │   └── ports.py  # Outbound interfaces (IInventoryRepository)  
+
 │   │   │       │  
 │   │   │       ├── app/          # Application layer (business use cases)  
 │   │   │       │   └── usecase.py# UpdateStock, GetInventory use cases  
