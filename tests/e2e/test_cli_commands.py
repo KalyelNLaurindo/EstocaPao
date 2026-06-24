@@ -188,5 +188,26 @@ class TestCLIE2E(unittest.TestCase):
         self.assertEqual(res.returncode, 0)
         self.assertIn("Inicializado", res.stdout)
 
+    def test_interactive_mode(self):
+        """Verify that launching without args boots into interactive loop."""
+        self.run_cmd(["--init"])
+        
+        # Run subprocess with stdin input: "status\nexit\n"
+        cmd = [sys.executable, self.main_py]
+        proc = subprocess.run(
+            cmd,
+            cwd=self.cwd,
+            env=self.env,
+            input="status\nexit\n",
+            capture_output=True,
+            text=True
+        )
+        self.assertEqual(proc.returncode, 0)
+        self.assertIn("Console Interativo", proc.stdout)
+        self.assertIn("estocapao>", proc.stdout)
+        # Should execute 'status' command inside loop
+        self.assertIn("Nenhum ingrediente cadastrado", proc.stdout)
+
 if __name__ == "__main__":
     unittest.main()
+

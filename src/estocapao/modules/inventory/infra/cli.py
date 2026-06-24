@@ -95,8 +95,35 @@ class CommandLineInterfaceParser:
         status_usecase = GetInventoryStatusUseCase(repo, quarantine_mgr)
 
         if not hasattr(parsed_args, "subcommand") or parsed_args.subcommand is None:
-            self.parser.print_help()
-            sys.exit(0)
+            if not args:
+                print("EstocaPão — Console Interativo")
+                print("Digite 'help' para ver os comandos ou 'exit' para sair.")
+                while True:
+                    try:
+                        cmd_line = input("estocapao> ").strip()
+                        if not cmd_line:
+                            continue
+                        if cmd_line.lower() in ("exit", "quit"):
+                            break
+                        import shlex
+                        args_list = shlex.split(cmd_line)
+                        if not args_list:
+                            continue
+                        if args_list[0] in ("help", "-h", "--help"):
+                            self.parser.print_help()
+                            continue
+                        self.parse_and_execute(args_list)
+                    except (KeyboardInterrupt, EOFError):
+                        print("\nSaindo...")
+                        break
+                    except SystemExit:
+                        continue
+                    except Exception as e:
+                        print(f"Erro: {e}")
+                return
+            else:
+                self.parser.print_help()
+                sys.exit(0)
 
         try:
             if parsed_args.subcommand == "add":
