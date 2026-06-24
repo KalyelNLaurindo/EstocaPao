@@ -222,6 +222,8 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * [ ] **[TSK-29](TSK-29.md):** Localization of CLI Presenter & Unicode Table Strings (2 SP)
 * [ ] **[TSK-30](TSK-30.md):** Layperson Interactive Prompts & Validation Badges (1 SP)
 * [ ] **[TSK-31](TSK-31.md):** CLI Accessibility and Daltonism Protection Mode (1 SP)
+* [ ] **[TSK-32](TSK-32.md):** HTTP REST API Backend Server Integration (3 SP)
+
 
 
 

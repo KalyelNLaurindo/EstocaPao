@@ -83,11 +83,11 @@ The terminal client is engineered for keyboard-only efficiency, optimized for ra
 
 This codebase represents a highly documented software engineering project. Navigating through the architectural and business definitions can be done via the following localized resources:
 
-- 🔍 [Product Discovery Document](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Product%20Discovery%20Document-%20EstocaP%C3%A3o.md) — Exhaustive user interviews, persona mappings, target audience pain points, and functional requirements definition.
-- 🏗️ [Software Design Document](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Software%20Design%20Document%20-%20EstocaP%C3%A3o.md) — Comprehensive technical blueprints, class diagrams, database schemas, security architectures, and Architecture Decision Records (ADRs).
-- 🏛️ [Solution Architecture Document](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Solution%20Architecture%20Document%20-%20EstocaP%C3%A3o.md) — Structural diagrams, C4 deployment models, OS-level permission controls, and resilience mechanics.
-- 📋 [Backlog Board README](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/backlog/README.md) — Agile Kanban board managing atomic, SMART tasks prioritized through the RICE estimation framework.
-- 📝 [Execution Plan](file:///e:/Desenvolvimento%20de%20Software/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Execution%20Plan%20-%20EstocaP%C3%A3o.md) — Systematic build phases, integration checkpoints, and automated boundary verification rules.
+- 🔍 [Product Discovery Document](file:///e:/Software%20Projects/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Product%20Discovery%20Document-%20EstocaP%C3%A3o.md) — Exhaustive user interviews, persona mappings, target audience pain points, and functional requirements definition.
+- 🏗️ [Software Design Document](file:///e:/Software%20Projects/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Software%20Design%20Document%20-%20EstocaP%C3%A3o.md) — Comprehensive technical blueprints, class diagrams, database schemas, security architectures, and Architecture Decision Records (ADRs).
+- 🏛️ [Solution Architecture Document](file:///e:/Software%20Projects/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Solution%20Architecture%20Document%20-%20EstocaP%C3%A3o.md) — Structural diagrams, C4 deployment models, OS-level permission controls, and resilience mechanics.
+- 📋 [Backlog Board README](file:///e:/Software%20Projects/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/backlog/README.md) — Agile Kanban board managing atomic, SMART tasks prioritized through the RICE estimation framework.
+- 📝 [Execution Plan](file:///e:/Software%20Projects/Software%20Engineering%20Portfolio/01-programacao/EstocaP%C3%A3o/context/Execution%20Plan%20-%20EstocaP%C3%A3o.md) — Systematic build phases, integration checkpoints, and automated boundary verification rules.
 
 ---
 
@@ -242,7 +242,16 @@ pip install -e .
 python -m unittest discover -s tests -v
 ```
 
+## **🔮 9. Planned Roadmap: HTTP REST API Backend**
+
+As detailed in task [TSK-32](context/backlog/TSK-32.md), we are planning to expose the inventory engine via a lightweight REST HTTP server to allow external tools and dashboards to interface with EstocaPão:
+* `GET /inventory` - Get current stock levels and safety alerts.
+* `POST /inventory/lots` - Register a new ingredient lot.
+* `POST /inventory/updates` - Record consumption or additions.
+* `DELETE /quarantine/lots/{batch_id}` - Discard a quarantined batch.
+
 ---
+
 
 🏁 **End of Document:** This repository README serves as the definitive engineering portal for the EstocaPão ecosystem. Changes to core validation patterns, database fallback structures, or execution interfaces must comply with official pull-request governance.
 
