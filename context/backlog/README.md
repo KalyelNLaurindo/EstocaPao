@@ -191,6 +191,11 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
   * RICE Score: 285.0 (High Priority / Should Have) | Value: 5 / Effort: 1 / Reach: 95 / Impact: 3.0 / Confidence: 1.0  
   * Status: To Do  
 
+* **[TSK-33](TSK-33.md): Terminal UI/UX Overhaul — Interactive Shell Visual Redesign**  
+  * Epic Link: FT-11 (UX Terminal & Onboarding)  
+  * RICE Score: 285.0 (High Priority / Must Have) | Value: 5 / Effort: 1 / Reach: 95 / Impact: 3.0 / Confidence: 1.0  
+  * Status: To Do  
+
 
 
 ## **3\. 📋 Basic Markdown Kanban Board**
@@ -223,6 +228,7 @@ The backlog has been structured in a strict TDD (Domain-Driven Bottom-Up) order,
 * [ ] **[TSK-30](TSK-30.md):** Layperson Interactive Prompts & Validation Badges (1 SP)
 * [ ] **[TSK-31](TSK-31.md):** CLI Accessibility and Daltonism Protection Mode (1 SP)
 * [ ] **[TSK-32](TSK-32.md):** HTTP REST API Backend Server Integration (3 SP)
+* [ ] **[TSK-33](TSK-33.md):** Terminal UI/UX Overhaul — Interactive Shell Visual Redesign (3 SP)
 
 
 
